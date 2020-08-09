@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=LZWolf
+Comment=Advanced Wolfenstein 3D source port
+Exec=lzwolf
+Icon=lzwolf
+Categories=Game

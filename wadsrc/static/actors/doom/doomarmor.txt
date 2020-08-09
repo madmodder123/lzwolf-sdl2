@@ -1,0 +1,37 @@
+// Armor bonus --------------------------------------------------------------
+
+actor ArmorBonus : BasicArmorBonus
+{
+	radius 20
+	height 16
+	inventory.icon "MACHGUN"
+	armor.savepercent 33.335
+	armor.saveamount 1
+	armor.maxsaveamount 200
+	+COUNTITEM
+	+inventory.ALWAYSPICKUP
+	states
+	{
+		Spawn:
+			GARD ABCDCB 6
+			loop
+	}
+}
+
+// Green armor --------------------------------------------------------------
+
+actor GreenArmor : BasicArmorPickup
+{
+	radius 20
+	height 16
+	inventory.icon "MACHGUN"
+	armor.savepercent 33.335
+	armor.saveamount 100
+	states
+	{
+		Spawn:
+			DOGY A 6
+			DOGY A 7 bright
+			loop
+	}
+}

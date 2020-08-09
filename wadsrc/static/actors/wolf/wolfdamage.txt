@@ -1,0 +1,13 @@
+actor FireDamage : Damage
+{
+}
+
+actor SilentDamage : Damage
+{
+	damage.silent 1
+}
+
+actor MeleeDamage : Damage
+{
+	damage.melee 1
+}

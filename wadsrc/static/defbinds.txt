@@ -1,0 +1,5 @@
+mebind "c" "set copiedtile $me_tile; echo copied $copiedtile"
+mebind "f" "mebind c \"set copiedsector $me_sector; echo copied $copiedsector\"; mebind r \"me_sector $copiedsector; echo pasted $copiedsector\"; echo sector mode"
+mebind "i" "spotinfo"
+mebind "r" "me_tile $copiedtile; echo pasted $copiedtile"
+mebind "t" "mebind c \"set copiedtile $me_tile; echo copied $copiedtile\"; mebind r \"me_tile $copiedtile; echo pasted $copiedtile\"; echo tile mode"
