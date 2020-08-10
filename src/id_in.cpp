@@ -709,7 +709,7 @@ IN_Startup(void)
 #if SDL_VERSION_ATLEAST(2,0,0)
 #ifdef __unix__
 //GUIDs for xbox controllers that get screwed up when xpad "triggers_to_buttons" = 1
-char xbox_guids[]={ "030000006f0e00003901000020060000", "030000006f0e00001304000000010000", "03000000380700001647000010040000", "03000000ad1b000016f0000090040000", "030000005e0400008e02000004010000", "030000005e0400008e02000062230000", "030000005e040000e302000003020000", "030000005e040000d102000001010000", "030000005e040000dd02000003020000", "030000005e040000d102000003020000", "030000005e040000d102000002010000", "050000005e040000fd02000030110000", "030000005e040000ea02000000000000", "030000005e040000ea02000001030000", "030000005e0400008e02000000010000" };
+string xbox_guids[15] = { "030000006f0e00003901000020060000", "030000006f0e00001304000000010000", "03000000380700001647000010040000", "03000000ad1b000016f0000090040000", "030000005e0400008e02000004010000", "030000005e0400008e02000062230000", "030000005e040000e302000003020000", "030000005e040000d102000001010000", "030000005e040000dd02000003020000", "030000005e040000d102000003020000", "030000005e040000d102000002010000", "050000005e040000fd02000030110000", "030000005e040000ea02000000000000", "030000005e040000ea02000001030000", "030000005e0400008e02000000010000" };
 #endif
 		if(SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER) == 0 && SDL_IsGameController(param_joystickindex))
 		{
@@ -733,7 +733,7 @@ char xbox_guids[]={ "030000006f0e00003901000020060000", "030000006f0e00001304000
 				{
 				Printf("triggers_to_buttons is enabled, fixing gamemapping!");
 				// create default mapping - this is the PS3 dual shock mapping
-				std::string mapping = string(guid) + "," + string(SDL_JoystickName(joy)) + ",a:b0,b:b1,back:b8,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b11,lefttrigger:b6,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b12,righttrigger:b7,rightx:a2,righty:a3,start:b9,x:b2,y:b3,platform:Linux,";
+				std::string mapping = string(guid) + "," + string(SDL_JoystickName(Joystick)) + ",a:b0,b:b1,back:b8,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b11,lefttrigger:b6,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b12,righttrigger:b7,rightx:a2,righty:a3,start:b9,x:b2,y:b3,platform:Linux,";
 				SDL_GameControllerAddMapping(mapping.c_str());
 				} else {
 				Printf("triggers_to_buttons is disabled! Carry on!");
