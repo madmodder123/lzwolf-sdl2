@@ -615,15 +615,14 @@ void SelectGame(TArray<FString> &wadfiles, const char* iwad, const char* datawad
 #if !defined(__APPLE__)
 		dataPaths += FString(";") + configDir;
 #endif
-
+		dataPaths += FString(";") + FileSys::GetDirectoryPath(FileSys::DIR_Games);
 		// Add documents and application support directories if they're not mapped to the config directory.
 		FString tmp;
 		if((tmp = FileSys::GetDirectoryPath(FileSys::DIR_Documents)).Compare(configDir) != 0)
 			dataPaths += FString(";") + tmp;
 		if((tmp = FileSys::GetDirectoryPath(FileSys::DIR_ApplicationSupport)).Compare(configDir) != 0)
 			dataPaths += FString(";") + tmp;
-		if((tmp = FileSys::GetDirectoryPath(FileSys::DIR_Games)).Compare(configDir) != 0)
-			dataPaths += FString(";") + tmp;
+		
 		
 		config.CreateSetting("BaseDataPaths", dataPaths);
 	}
