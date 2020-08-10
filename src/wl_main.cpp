@@ -1112,6 +1112,11 @@ static const char* CheckParameters(int argc, char *argv[], TArray<FString> &file
 			++i;
 		}
 		else IFARG("--console") {} // Windows always create console parameter
+		else IFARG("--gamedir")
+		{
+			if(++i < argc)
+				FileSys::SetDirectoryPath(FileSys::DIR_Games, argv[i]);
+		}
 		else IFARG("--savedir")
 		{
 			if(++i < argc)
