@@ -727,23 +727,6 @@ array<string, 15> xbox_guids = {"030000006f0e00003901000020060000", "030000006f0
 				JoyNumHats = 0;
 
 				JoySensitivity = new JoystickSens[JoyNumAxes];
-				Joystick = SDL_GameControllerGetJoystick(GameController);
-				SDL_JoystickGUID guid = SDL_JoystickGetGUID(Joystick);
-				char guid_str[1024];
-				SDL_JoystickGetGUIDString(guid, guid_str, sizeof(guid_str));
-				
-				#ifdef __unix__
-				if (cin >> guid_str && 
-				std::find(std::begin(xbox_guids), std::end(xbox_guids), guid_str) == std::end(xbox_guids))
-				{
-				printf("triggers_to_buttons is enabled, fixing gamemapping!");
-				// create default mapping - this is the PS3 dual shock mapping
-				std::string mapping = string(guid_str) + "," + string(SDL_GameControllerName(GameController)) + ",a:b0,b:b1,back:b8,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b11,lefttrigger:b6,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b12,righttrigger:b7,rightx:a2,righty:a3,start:b9,x:b2,y:b3,platform:Linux,";
-				SDL_GameControllerAddMapping(mapping.c_str());
-				} else {
-				printf("triggers_to_buttons is disabled! Carry on!");
-				}
-				#endif
 			}
 		}
 		else
@@ -764,7 +747,27 @@ array<string, 15> xbox_guids = {"030000006f0e00003901000020060000", "030000006f0
 				JoySensitivity = new JoystickSens[JoyNumAxes];
 			}
 		}
-
+#if SDL_VERSION_ATLEAST(2,0,0)
+			if(GameController)
+			{
+				SDL_JoystickGUID guid = SDL_JoystickGetGUID(Joystick);
+				char guid_str[1024];
+				SDL_JoystickGetGUIDString(guid, guid_str, sizeof(guid_str));
+				
+				#ifdef __unix__
+				if (cin >> guid_str && 
+				std::find(std::begin(xbox_guids), std::end(xbox_guids), guid_str) == std::end(xbox_guids))
+				{
+				printf("triggers_to_buttons is enabled, fixing gamemapping!");
+				// create default mapping - this is the PS3 dual shock mapping
+				std::string mapping = string(guid_str) + "," + string(SDL_GameControllerName(GameController)) + ",a:b0,b:b1,back:b8,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b11,lefttrigger:b6,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b12,righttrigger:b7,rightx:a2,righty:a3,start:b9,x:b2,y:b3,platform:Linux,";
+				SDL_GameControllerAddMapping(mapping.c_str());
+				} else {
+				printf("triggers_to_buttons is disabled! Carry on!");
+				}
+				#endif
+			}
+#endif
 		if(JoySensitivity)
 		{
 			for(int i = 0;i < JoyNumAxes;++i)
