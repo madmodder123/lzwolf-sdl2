@@ -661,6 +661,7 @@ void SelectGame(TArray<FString> &wadfiles, const char* iwad, const char* datawad
 #if !defined(__APPLE__) && !defined(_WIN32)
 	LookForGameData(datawadRes, basefiles, "/usr/share/games/wolf3d");
 	LookForGameData(datawadRes, basefiles, "/usr/local/share/games/wolf3d");
+	LookForGameData(datawadRes, basefiles, "/home/pi/RetroPie/roms/ports/wolf3d");
 #endif
 
 	// Look for a steam install. (Basically from ZDoom)
