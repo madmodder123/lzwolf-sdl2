@@ -697,6 +697,17 @@ void IN_GameControllerDBMappingTEST()
 	printf("TEST 2");
 	SDL_JoystickGetGUIDString(guid, guid_str, sizeof(guid_str));
 	printf("TEST 3");
+	printf("triggers_to_buttons is enabled, fixing gamemapping!");
+	// create default mapping
+	std::string mapping = guid_str;
+	//mapping.append(guid_str);
+	mapping.append(",");
+	mapping.append(SDL_JoystickName(Joystick)));
+	mapping.append(",a:b0,b:b1,back:b8,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b11,lefttrigger:b6,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b12,righttrigger:b7,rightx:a2,righty:a3,start:b9,x:b2,y:b3,platform:Linux,");
+	//std::string mapping = string(guid_str) + "," + string(SDL_JoystickName(Joystick)) + ",a:b0,b:b1,back:b8,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b11,lefttrigger:b6,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b12,righttrigger:b7,rightx:a2,righty:a3,start:b9,x:b2,y:b3,platform:Linux,";
+	printf("TEST 4");
+	SDL_GameControllerAddMapping(mapping.c_str());
+	printf("TEST 5");
 	#endif
 }
 
