@@ -103,6 +103,10 @@ static KeyboardDef KbdDefs = {
 	sc_PgDn,                // downright
 };
 
+static XboxControllerDef xboneguids = {
+	030000006f0e00003901000020060000, 030000006f0e00001304000000010000, 03000000380700001647000010040000, 03000000ad1b000016f0000090040000, 030000005e0400008e02000004010000, 030000005e0400008e02000062230000, 030000005e040000e302000003020000, 030000005e040000d102000001010000, 030000005e040000dd02000003020000, 030000005e040000d102000003020000, 030000005e040000d102000002010000, 050000005e040000fd02000030110000, 030000005e040000ea02000000000000, 030000005e040000ea02000001030000, 030000005e0400008e02000000010000,
+};
+
 static SDL_Joystick *Joystick;
 #if SDL_VERSION_ATLEAST(2,0,0)
 static SDL_GameController *GameController;
@@ -675,6 +679,50 @@ void IN_ProcessEvents()
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////
+//
+//	IN_GameControllerDBMapping() - Updates controller mapping
+//
+///////////////////////////////////////////////////////////////////////////
+void IN_GameControllerDBMappingTEST()
+{
+	#if SDL_VERSION_ATLEAST(2,0,0)
+    // Inside function 
+    // Use the import statement inside limited scope 
+    using namespace std; 
+	printf("TEST 0");
+	Joystick = SDL_GameControllerGetJoystick(GameController);
+	printf("TEST 01");
+	SDL_JoystickGUID guid = SDL_JoystickGetGUID(Joystick);
+	printf("TEST 1");
+	char guid_str[32];
+	printf("TEST 2");
+	SDL_JoystickGetGUIDString(guid, guid_str, sizeof(guid_str));
+	printf("TEST 3");
+	#endif
+}
+
+void IN_GameControllerDBMapping()
+{ 
+    // Inside function 
+    // Use the import statement inside limited scope 
+    using namespace std; 
+	printf("TEST 0");
+	Joystick = SDL_GameControllerGetJoystick(GameController);
+	printf("TEST 01");
+	SDL_JoystickGUID guid = SDL_JoystickGetGUID(Joystick);
+	printf("TEST 1");
+	char guid_str[1024];
+	printf("TEST 2");
+	SDL_JoystickGetGUIDString(guid, guid_str, sizeof(guid_str));
+	printf("TEST 3");
+	printf("triggers_to_buttons is enabled, fixing gamemapping!");
+	// create default mapping
+	std::string mapping = string(guid_str) + "," + string(SDL_JoystickName(Joystick)) + ",a:b0,b:b1,back:b8,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b11,lefttrigger:b6,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b12,righttrigger:b7,rightx:a2,righty:a3,start:b9,x:b2,y:b3,platform:Linux,";
+	printf("TEST 4");
+	SDL_GameControllerAddMapping(mapping.c_str());
+	printf("TEST 5");
+}
 
 ///////////////////////////////////////////////////////////////////////////
 //
@@ -774,51 +822,6 @@ IN_Startup(void)
 	MousePresent = true;
 
 	IN_Started = true;
-}
-
-///////////////////////////////////////////////////////////////////////////
-//
-//	IN_GameControllerDBMapping() - Updates controller mapping
-//
-///////////////////////////////////////////////////////////////////////////
-void IN_GameControllerDBMappingTEST()
-{
-	#if SDL_VERSION_ATLEAST(2,0,0)
-    // Inside function 
-    // Use the import statement inside limited scope 
-    using namespace std; 
-	printf("TEST 0");
-	Joystick = SDL_GameControllerGetJoystick(GameController);
-	printf("TEST 01");
-	SDL_JoystickGUID guid = SDL_JoystickGetGUID(Joystick);
-	printf("TEST 1");
-	char guid_str[32];
-	printf("TEST 2");
-	SDL_JoystickGetGUIDString(guid, guid_str, sizeof(guid_str));
-	printf("TEST 3");
-	#endif
-}
-
-void IN_GameControllerDBMapping()
-{ 
-    // Inside function 
-    // Use the import statement inside limited scope 
-    using namespace std; 
-	printf("TEST 0");
-	Joystick = SDL_GameControllerGetJoystick(GameController);
-	printf("TEST 01");
-	SDL_JoystickGUID guid = SDL_JoystickGetGUID(Joystick);
-	printf("TEST 1");
-	char guid_str[1024];
-	printf("TEST 2");
-	SDL_JoystickGetGUIDString(guid, guid_str, sizeof(guid_str));
-	printf("TEST 3");
-	printf("triggers_to_buttons is enabled, fixing gamemapping!");
-	// create default mapping
-	std::string mapping = string(guid_str) + "," + string(SDL_JoystickName(Joystick)) + ",a:b0,b:b1,back:b8,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b11,lefttrigger:b6,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b12,righttrigger:b7,rightx:a2,righty:a3,start:b9,x:b2,y:b3,platform:Linux,";
-	printf("TEST 4");
-	SDL_GameControllerAddMapping(mapping.c_str());
-	printf("TEST 5");
 }
 
 ///////////////////////////////////////////////////////////////////////////
