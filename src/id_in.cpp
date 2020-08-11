@@ -36,6 +36,7 @@
 #include <iostream>
 #include <string>
 #include <array>
+#include <vector>
 
 #if !SDL_VERSION_ATLEAST(1,3,0)
 #define SDLK_KP_0 SDLK_KP0
@@ -682,10 +683,16 @@ void IN_ProcessEvents()
 //	IN_GameControllerDBMapping() - Updates controller mapping
 //
 ///////////////////////////////////////////////////////////////////////////
+bool in_array(const std::string &value, const std::vector<string> &array)
+{
+    return std::find(array.begin(), array.end(), value) != array.end();
+}
+
 void IN_GameControllerDBMapping()
 {
 	#if SDL_VERSION_ATLEAST(2,0,0)
     using namespace std; 
+	std::vector<std::string> xbox_guids {"030000006f0e00003901000020060000", "030000006f0e00001304000000010000", "03000000380700001647000010040000", "03000000ad1b000016f0000090040000", "030000005e0400008e02000004010000", "030000005e0400008e02000062230000", "030000005e040000e302000003020000", "030000005e040000d102000001010000", "030000005e040000dd02000003020000", "030000005e040000d102000003020000", "030000005e040000d102000002010000", "050000005e040000fd02000030110000", "030000005e040000ea02000000000000", "030000005e040000ea02000001030000", "030000005e0400008e02000000010000"};
 	printf("TEST 0");
 	Joystick = SDL_GameControllerGetJoystick(GameController);
 	printf("TEST 01");
@@ -694,20 +701,22 @@ void IN_GameControllerDBMapping()
 	char guid_str[32];
 	printf("TEST 2");
 	SDL_JoystickGetGUIDString(guid, guid_str, sizeof(guid_str));
-	printf("TEST 3");
-	printf("triggers_to_buttons is enabled, fixing gamemapping!");
-	// create default mapping
-	std::string mapping = guid_str;
-	//mapping.append(guid_str);
-	mapping.append(",");
-	mapping.append(SDL_JoystickName(Joystick));
-	mapping.append(",a:b0,b:b1,back:b8,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b11,lefttrigger:b6,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b12,righttrigger:b7,rightx:a2,righty:a3,start:b9,x:b2,y:b3,platform:Linux,");
-	printf("TEST 4");
-	if (SDL_GameControllerAddMapping(mapping.c_str()) == 1){
-	printf("Fixed Xbox controller mapping issue!");
-	} else {
-	printf("Failed to fix Xbox controller mapping issue!");
-	}
+	if (in_array(guid_str, xbox_guids)) {
+		printf("TEST 3");
+		printf("triggers_to_buttons is enabled in xpad, fixing gamemapping!");
+		// create default mapping
+		std::string mapping = guid_str;
+		//mapping.append(guid_str);
+		mapping.append(",");
+		mapping.append(SDL_JoystickName(Joystick));
+		mapping.append(",a:b0,b:b1,back:b8,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b11,lefttrigger:b6,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b12,righttrigger:b7,rightx:a2,righty:a3,start:b9,x:b2,y:b3,platform:Linux,");
+		printf("TEST 4");
+		if (SDL_GameControllerAddMapping(mapping.c_str()) == 1){
+			printf("Fixed Xbox controller mapping issue!");
+		} else {
+			printf("Failed to fix Xbox controller mapping issue!");
+		}
+    }
 	#endif
 }
 
