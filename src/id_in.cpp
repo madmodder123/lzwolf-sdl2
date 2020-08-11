@@ -37,8 +37,6 @@
 #include <string>
 #include <array>
 
-using namespace std;
-
 #if !SDL_VERSION_ATLEAST(1,3,0)
 #define SDLK_KP_0 SDLK_KP0
 #define SDLK_KP_1 SDLK_KP1
