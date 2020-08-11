@@ -1122,6 +1122,11 @@ static const char* CheckParameters(int argc, char *argv[], TArray<FString> &file
 			if(++i < argc)
 				FileSys::SetDirectoryPath(FileSys::DIR_DataDirCMD, argv[i]);
 		}
+		else IFARG("--configdir")
+		{
+			if(++i < argc)
+				FileSys::SetDirectoryPath(FileSys::DIR_ApplicationSupport, argv[i]);
+		}
 		else IFARG("--port")
 		{
 			if(++i < argc)
@@ -1171,6 +1176,7 @@ static const char* CheckParameters(int argc, char *argv[], TArray<FString> &file
 			" --console              Display a console window\n"
 #endif
 			" --config <file>        Use an explicit location for the config file\n"
+			" --configdir <dir>      Add location to make config files\n"
 			" --savedir <dir>        Use an explicit location for save games\n"
 			" --file <file>          Loads an extra data file\n"
 			" --data <extension>     Selects the given game data set skipping the dialog\n"
