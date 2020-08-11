@@ -705,6 +705,16 @@ IN_Startup(void)
 	if(SDL_InitSubSystem(SDL_INIT_JOYSTICK) == 0 &&
 		param_joystickindex >= 0 && param_joystickindex < SDL_NumJoysticks())
 	{
+	//
+    // Load controller mappings
+    //
+    printf("Sys_InitInput: Loading gamecontrollerdb.txt\n" );
+    int num_devices = SDL_GameControllerAddMappingsFromFile("gamecontrollerdb.txt");
+    if (num_devices < 0) {
+        printf( "Sys_InitInput: SDL_GameControllerAddMappingsFromFile() failed: %s\n", SDL_GetError());
+    } else {
+        printf( "Sys_InitInput: SDL_GameControllerAddMappingsFromFile() added %i controller maps\n", num_devices );
+    }
 #if SDL_VERSION_ATLEAST(2,0,0)
 		if(SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER) == 0 && SDL_IsGameController(param_joystickindex))
 		{
@@ -718,21 +728,8 @@ IN_Startup(void)
 				JoyNumHats = 0;
 
 				JoySensitivity = new JoystickSens[JoyNumAxes];
-				
-				printf("TEST 0");
-				SDL_JoystickGUID guid = SDL_JoystickGetGUID(Joystick);
-				printf("TEST 1");
-				char guid_str[1024];
-				printf("TEST 2");
-				SDL_JoystickGetGUIDString(guid, guid_str, sizeof(guid_str));
-				printf("TEST 3");
-				printf("triggers_to_buttons is enabled, fixing gamemapping!");
-				// create default mapping
-				std::string mapping = string(guid_str) + "," + string(SDL_JoystickName(Joystick)) + ",a:b0,b:b1,back:b8,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b11,lefttrigger:b6,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b12,righttrigger:b7,rightx:a2,righty:a3,start:b9,x:b2,y:b3,platform:Linux,";
-				printf("TEST 4");
-				SDL_GameControllerAddMapping(mapping.c_str());
-				printf("TEST 5");
-				
+				//GameControllerDBMapping()
+								
 			}
 		printf("TEST CONDONE");
 		}
@@ -778,6 +775,27 @@ IN_Startup(void)
 	MousePresent = true;
 
 	IN_Started = true;
+}
+
+void GameControllerDBMapping()
+{ 
+    // Inside function 
+    // Use the import statement inside limited scope 
+    using namespace std; 
+	printf("TEST 0");
+	SDL_JoystickGUID guid = SDL_JoystickGetGUID(Joystick);
+	printf("TEST 1");
+	char guid_str[1024];
+	printf("TEST 2");
+	SDL_JoystickGetGUIDString(guid, guid_str, sizeof(guid_str));
+	printf("TEST 3");
+	printf("triggers_to_buttons is enabled, fixing gamemapping!");
+	// create default mapping
+	std::string mapping = string(guid_str) + "," + string(SDL_JoystickName(Joystick)) + ",a:b0,b:b1,back:b8,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b11,lefttrigger:b6,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b12,righttrigger:b7,rightx:a2,righty:a3,start:b9,x:b2,y:b3,platform:Linux,";
+	printf("TEST 4");
+	SDL_GameControllerAddMapping(mapping.c_str());
+	printf("TEST 5");
+    // Proceed with function 
 }
 
 ///////////////////////////////////////////////////////////////////////////
