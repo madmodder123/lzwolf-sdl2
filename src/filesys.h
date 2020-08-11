@@ -51,6 +51,7 @@ namespace FileSys
 		DIR_Program,
 		DIR_Configuration,
 		DIR_Saves,
+		DIR_DataDirCMD,
 		DIR_ApplicationSupport,
 		DIR_Documents,
 		DIR_Screenshots,

@@ -622,6 +622,8 @@ void SelectGame(TArray<FString> &wadfiles, const char* iwad, const char* datawad
 			dataPaths += FString(";") + tmp;
 		if((tmp = FileSys::GetDirectoryPath(FileSys::DIR_ApplicationSupport)).Compare(configDir) != 0)
 			dataPaths += FString(";") + tmp;
+		if((tmp = FileSys::GetDirectoryPath(FileSys::DIR_DataDirCMD)).Compare(configDir) != 0)
+			dataPaths += FString(";") + tmp;
 
 		config.CreateSetting("BaseDataPaths", dataPaths);
 	}

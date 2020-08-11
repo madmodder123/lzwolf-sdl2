@@ -139,6 +139,7 @@ void SetupPaths(int argc, const char * const *argv)
 	FString &progDir = SpecialPaths[DIR_Program];
 	FString &configDir = SpecialPaths[DIR_Configuration];
 	FString &saveDir = SpecialPaths[DIR_Saves];
+	FString &cmdlinedataDir = SpecialPaths[DIR_DataDirCMD];
 	FString &appsupportDir = SpecialPaths[DIR_ApplicationSupport];
 	FString &documentsDir = SpecialPaths[DIR_Documents];
 	FString &screenshotsDir = SpecialPaths[DIR_Screenshots];
