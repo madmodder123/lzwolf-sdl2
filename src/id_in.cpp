@@ -689,7 +689,6 @@ void IN_GameControllerDBMapping()
 {
 	#if SDL_VERSION_ATLEAST(2,0,0)
     using namespace std; 
-	char xbox_mapping[1024];
 	std::string xbox_mapping = ("a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b8,leftshoulder:b4,leftstick:b9,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b10,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3");
 	//std::vector<std::string> xbox_guids {"030000006f0e00003901000020060000", "030000006f0e00001304000000010000", "03000000380700001647000010040000", "03000000ad1b000016f0000090040000", "030000005e0400008e02000004010000", "030000005e0400008e02000062230000", "030000005e040000e302000003020000", "030000005e040000d102000001010000", "030000005e040000dd02000003020000", "030000005e040000d102000003020000", "030000005e040000d102000002010000", "050000005e040000fd02000030110000", "030000005e040000ea02000000000000", "030000005e040000ea02000001030000", "030000005e0400008e02000000010000"};
 	printf("TEST 0");
@@ -700,8 +699,6 @@ void IN_GameControllerDBMapping()
 	char guid_str[32];
 	printf("TEST 2");
 	SDL_JoystickGetGUIDString(guid, guid_str, sizeof(guid_str));
-	char current_mapping[1024];
-	std::string current_mapping = SDL_GameControllerMapping(GameController));
 	//if (in_array(guid_str, xbox_guids)) {
 	//if (std::find(xbox_guids.begin(), xbox_guids.end(), guid_str) != xbox_guids.end()) {
 	if (xbox_mapping.find(current_mapping) != std::string::npos) {
@@ -770,7 +767,8 @@ IN_Startup(void)
 			if(GameController)
 			{
 				Printf("Using game controller: %s\n", SDL_GameControllerName(GameController));
-				//IN_GameControllerDBMapping();
+				current_mapping = SDL_GameControllerMapping(GameController));
+				IN_GameControllerDBMapping();
 				SDL_GameControllerEventState(SDL_IGNORE);
 				JoyNumButtons = SDL_CONTROLLER_BUTTON_MAX;
 				JoyNumAxes = SDL_CONTROLLER_AXIS_MAX;
