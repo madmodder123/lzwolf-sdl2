@@ -699,7 +699,7 @@ void IN_GameControllerDBMapping()
 	char guid_str[32];
 	printf("TEST 2");
 	SDL_JoystickGetGUIDString(guid, guid_str, sizeof(guid_str));
-	string current_mapping = SDL_GameControllerMapping(GameController));
+	string current_mapping = SDL_GameControllerMapping(GameController);
 	//if (in_array(guid_str, xbox_guids)) {
 	//if (std::find(xbox_guids.begin(), xbox_guids.end(), guid_str) != xbox_guids.end()) {
 	if (current_mapping.find(xbox_mapping) != string::npos) {
