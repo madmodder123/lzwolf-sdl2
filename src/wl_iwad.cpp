@@ -611,6 +611,10 @@ void SelectGame(TArray<FString> &wadfiles, const char* iwad, const char* datawad
 		FString configDir = FileSys::GetDirectoryPath(FileSys::DIR_Configuration);
 		dataPaths = ".;$PROGDIR";
 
+		#ifdef _GAME_CONFIG_DIR
+			dataPaths += FString(";") + _GAME_CONFIG_DIR;
+		#endif
+		
 		// On OS X our default config directory is ~/Library/Preferences which isn't a good place to put data at all.
 #if !defined(__APPLE__)
 		dataPaths += FString(";") + configDir;
