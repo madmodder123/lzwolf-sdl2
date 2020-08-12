@@ -763,7 +763,7 @@ IN_Startup(void)
 			if(GameController)
 			{
 				Printf("Using game controller: %s\n", SDL_GameControllerName(GameController));
-				IN_GameControllerDBMapping();
+				//IN_GameControllerDBMapping();
 				SDL_GameControllerEventState(SDL_IGNORE);
 				JoyNumButtons = SDL_CONTROLLER_BUTTON_MAX;
 				JoyNumAxes = SDL_CONTROLLER_AXIS_MAX;
