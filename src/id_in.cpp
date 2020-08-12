@@ -695,7 +695,7 @@ void IN_GameControllerDBMapping()
 	char guid_str[32];
 	SDL_JoystickGetGUIDString(guid, guid_str, sizeof(guid_str));
 	string current_mapping = SDL_GameControllerMapping(GameController);
-	if (current_mapping.find(xbox_mapping) != string::npos) {
+	if (current_mapping.find(xbox_mapping) != string::npos && JoyNumAxes == 4) {
 		printf("triggers_to_buttons is enabled in xpad, fixing game mapping!\n");
 		// create default mapping
 		std::string mapping = guid_str;
