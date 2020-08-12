@@ -46,6 +46,9 @@ endif()
 
 # Multiarch support
 if(UNIX AND NOT APPLE)
+if(_GAME_SEARCH_DIR)
+	add_definitions(-D_GAME_SEARCH_DIR)
+endif()
 	# We are in the games section
 	set(CMAKE_INSTALL_BINDIR "games")
 

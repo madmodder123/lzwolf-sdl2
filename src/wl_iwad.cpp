@@ -659,6 +659,9 @@ void SelectGame(TArray<FString> &wadfiles, const char* iwad, const char* datawad
 	while(split != 0);
 
 #if !defined(__APPLE__) && !defined(_WIN32)
+#ifdef _GAME_SEARCH_DIR
+	LookForGameData(datawadRes, basefiles, _GAME_SEARCH_DIR);
+#endif
 	LookForGameData(datawadRes, basefiles, "/usr/share/games/wolf3d");
 	LookForGameData(datawadRes, basefiles, "/usr/local/share/games/wolf3d");
 #endif
