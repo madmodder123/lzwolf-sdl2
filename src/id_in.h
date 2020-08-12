@@ -133,6 +133,10 @@ typedef	int		ScanCode;
 
 #define	key_None		0
 
+#if SDL_VERSION_ATLEAST(2,0,0)
+#define	Xbox_mapping		a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b8,leftshoulder:b4,leftstick:b9,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b10,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3
+#endif
+
 enum Demo {
 	demo_Off,demo_Record,demo_Playback,demo_PlayDone
 };
