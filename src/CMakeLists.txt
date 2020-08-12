@@ -30,13 +30,6 @@ else()
 	set(EXTRA_LIBRARIES)
 endif()
 
-if(_GAME_SEARCH_DIR)
-	add_definitions(-D_GAME_SEARCH_DIR)
-endif()
-if(_GAME_CONFIG_DIR)
-	add_definitions(-D_GAME_CONFIG_DIR)
-endif()
-
 check_function_exists(stricmp STRICMP_EXISTS)
 check_function_exists(strnicmp STRNICMP_EXISTS)
 check_function_exists(atoll ATOLL_EXISTS)

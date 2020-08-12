@@ -612,7 +612,7 @@ void SelectGame(TArray<FString> &wadfiles, const char* iwad, const char* datawad
 		dataPaths = ".;$PROGDIR";
 
 		#ifdef _GAME_CONFIG_DIR
-			dataPaths += FString(";") + _GAME_CONFIG_DIR;
+			dataPaths += FString(";") + "$_GAME_CONFIG_DIR";
 		#endif
 		
 		// On OS X our default config directory is ~/Library/Preferences which isn't a good place to put data at all.
@@ -664,7 +664,7 @@ void SelectGame(TArray<FString> &wadfiles, const char* iwad, const char* datawad
 
 #if !defined(__APPLE__) && !defined(_WIN32)
 #ifdef _GAME_SEARCH_DIR
-	LookForGameData(datawadRes, basefiles, _GAME_SEARCH_DIR);
+	LookForGameData(datawadRes, basefiles, "$_GAME_SEARCH_DIR");
 #endif
 	LookForGameData(datawadRes, basefiles, "/usr/share/games/wolf3d");
 	LookForGameData(datawadRes, basefiles, "/usr/local/share/games/wolf3d");
