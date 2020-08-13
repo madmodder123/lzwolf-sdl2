@@ -609,10 +609,12 @@ void SelectGame(TArray<FString> &wadfiles, const char* iwad, const char* datawad
 	if(config.GetSetting("BaseDataPaths") == NULL)
 	{
 		FString configDir = FileSys::GetDirectoryPath(FileSys::DIR_Configuration);
-		dataPaths = ".;$PROGDIR";
-
 		#ifdef _GAME_CONFIG_DIR
-			dataPaths += FString(";") + "$_GAME_CONFIG_DIR";
+			//dataPaths += FString(";") + "$_GAME_CONFIG_DIR";
+			dataPaths = FString(".;" _GAME_CONFIG_DIR);
+			//datawadDir = FString(INSTALL_PREFIX "/share/" BINNAME "/");
+		#else
+			dataPaths = ".;$PROGDIR";
 		#endif
 		
 		// On OS X our default config directory is ~/Library/Preferences which isn't a good place to put data at all.
