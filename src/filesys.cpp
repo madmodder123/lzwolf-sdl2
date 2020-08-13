@@ -214,6 +214,9 @@ void SetupPaths(int argc, const char * const *argv)
 		else
 			progDir = argv[0];
 	}
+	#ifdef _GAME_SEARCH_DIR
+		progDir = _GAME_SEARCH_DIR;
+	#endif
 #endif
 	int pos = progDir.LastIndexOfAny("/\\");
 	if(pos != -1)
